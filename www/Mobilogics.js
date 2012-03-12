@@ -2,7 +2,7 @@
  * Constructor
  **/
 function Mobilogics () {
-	
+	aaa
 }
 
 /**

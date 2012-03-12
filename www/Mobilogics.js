@@ -24,17 +24,17 @@ PhoneGap.addConstructor(Mobilogics.install);
  * Functions interface
  **/
 Mobilogics.prototype.start = function () {
-	PhoneGap.exec(null, null, "Mobilogics", "start");
+	PhoneGap.exec(null, null, "Mobilogics", "start", []);
 }
 
 Mobilogics.prototype.stop = function () {
-	PhoneGap.exec(null, null, "Mobilogics", "stop");
+	PhoneGap.exec(null, null, "Mobilogics", "stop", []);
 }
 
 Mobilogics.prototype.scan = function (successCallback) {
-	PhoneGap.exec(successCallback, null, "Mobilogics", "scan");
+	PhoneGap.exec(successCallback, null, "Mobilogics", "scan", []);
 }
 
 Mobilogics.prototype.addConnectionListener = function (connectedCallback, disconnectedCallback) {
-	PhoneGap.exec(connectedCallback, disconnectedCallback, "Mobilogics", "addConnectionListener");
+	PhoneGap.exec(connectedCallback, disconnectedCallback, "Mobilogics", "addConnectionListener", []);
 }

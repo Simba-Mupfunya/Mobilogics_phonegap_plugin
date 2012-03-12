@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title></title>
+  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
+	<meta charset="utf-8">
+
+
+	<!-- iPad/iPhone specific css below, add after your main css >
+	<link rel="stylesheet" media="only screen and (max-device-width: 1024px)" href="ipad.css" type="text/css" />		
+	<link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="iphone.css" type="text/css" />		
+	-->
+	<!-- If your application is targeting iOS BEFORE 4.0 you MUST put json2.js from http://www.JSON.org/json2.js into your www directory and include it here -->
+	<script type="text/javascript" charset="utf-8" src="phonegap-1.4.1.js"></script>
+    <script type="text/javascript" src="JPPhotoEffectPlugin.js"></script>
+    <script type="text/javascript">
+
+	var pictureSource;
+	var destinationType;
+	
+	function onBodyLoad() {		
+		document.addEventListener("deviceready", onDeviceReady, false);
+	}
+
+	function onDeviceReady() {
+		pictureSource = navigator.camera.PictureSourceType;
+		destinationType = navigator.camera.DestinationType;
+	}
+	
+	function capturePhoto () {
+		navigator.camera.getPicture(onPhotoSuccess, onFail, {quality:50, allowEdit:true, destinationType: destinationType.FILE_URI});
+	}
+	
+	function onPhotoSuccess (imageURI) {
+        console.log('onPhotoDataSuccess: ' + imageURI);
+        var smallImage = document.getElementById('image');
+		smallImage.style.display = 'block';
+		smallImage.src = imageURI;
+		processPhoto(imageURI);
+	}
+	
+	function onFail (message) {
+		alert('Failed because: ' + message);
+	}
+	
+	function processPhoto (imageURI) {
+		navigator.plugins.JPPhotoEffectPlugin.processPhoto(onPhotoEffectSuccess, onFail, imageURI);
+	}
+	
+	function onPhotoEffectSuccess (imageURI) {
+		console.log('onPhotoEffectSuccess: ' + imageURI);
+		var smallImage = document.getElementById('image');
+		smallImage.style.display = 'block';
+		smallImage.src = imageURI;
+	}
+    
+    </script>
+  </head>
+  <body onload="onBodyLoad()">
+	<button onclick="capturePhoto();">Capture Photo</button> <br>
+    <img style="display:none;width:300px;height:300px;" id="image" src="" />
+  </body>
+</html>

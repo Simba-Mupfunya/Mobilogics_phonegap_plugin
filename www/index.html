@@ -15,50 +15,36 @@
 	<script type="text/javascript" charset="utf-8" src="phonegap-1.4.1.js"></script>
     <script type="text/javascript" src="JPPhotoEffectPlugin.js"></script>
     <script type="text/javascript">
-
-	var pictureSource;
-	var destinationType;
 	
 	function onBodyLoad() {		
 		document.addEventListener("deviceready", onDeviceReady, false);
 	}
 
 	function onDeviceReady() {
-		pictureSource = navigator.camera.PictureSourceType;
-		destinationType = navigator.camera.DestinationType;
+		navigator.plugins.Mobilogics.start();
+		navigator.plugins.Mobilogics.addConnectionListener(onConnect, onDisconnect);
 	}
 	
-	function capturePhoto () {
-		navigator.camera.getPicture(onPhotoSuccess, onFail, {quality:50, allowEdit:true, destinationType: destinationType.FILE_URI});
+	function scan() {
+		navigator.plugins.Mobilogics.scan(onReceiveCode);
 	}
 	
-	function onPhotoSuccess (imageURI) {
-        console.log('onPhotoDataSuccess: ' + imageURI);
-        var smallImage = document.getElementById('image');
-		smallImage.style.display = 'block';
-		smallImage.src = imageURI;
-		processPhoto(imageURI);
+	function onReceiveCode(code) {
+		document.getElementById('code').innerHTML = code;
 	}
 	
-	function onFail (message) {
-		alert('Failed because: ' + message);
+	function onConnect() {
+		alert("connected");
 	}
 	
-	function processPhoto (imageURI) {
-		navigator.plugins.JPPhotoEffectPlugin.processPhoto(onPhotoEffectSuccess, onFail, imageURI);
-	}
-	
-	function onPhotoEffectSuccess (imageURI) {
-		console.log('onPhotoEffectSuccess: ' + imageURI);
-		var smallImage = document.getElementById('image');
-		smallImage.style.display = 'block';
-		smallImage.src = imageURI;
+	function onDisconnect() {
+		alert("disconnected");
 	}
     
     </script>
   </head>
   <body onload="onBodyLoad()">
-	<button onclick="capturePhoto();">Capture Photo</button> <br>
-    <img style="display:none;width:300px;height:300px;" id="image" src="" />
+	<button onclick="scan();">Scan</button> <br>
+    <p id='code'>code</p>
   </body>
 </html>

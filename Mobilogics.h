@@ -1,9 +1,9 @@
 #import <Foundation/Foundation.h>
-#import <PhoneGap/PGPlugin.h>
+#import <Cordova/CDVPlugin.h>
 #import <Barcode/BarcodeFramework.h>
 #import <DevTool/DevToolFramework.h>
 
-@interface Mobilogics : PGPlugin <ReceiveCommandHandler, NotificationHandler> {
+@interface Mobilogics : CDVPlugin <ReceiveCommandHandler, NotificationHandler> {
 
 }
 

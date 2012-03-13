@@ -18,7 +18,7 @@ Mobilogics.install = function () {
 /**
  * Add to PhoneGap constructor
  **/
-PhoneGap.addConstructor(Mobilogics.install);
+Cordova.addConstructor(Mobilogics.install);
 
 /**
  * Functions interface

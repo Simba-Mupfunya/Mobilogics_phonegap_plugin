@@ -34,14 +34,14 @@
 
 - (void)connectNotify 
 {
-    PluginResult *result = [PluginResult resultWithStatus:PGCommandStatus_OK];
+    CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
     NSString *jsString = [result toSuccessCallbackString:connectionCallbackId];
     [self.webView stringByEvaluatingJavaScriptFromString:jsString];
 }
 
 - (void)disconnectNotify
 {
-    PluginResult *result = [PluginResult resultWithStatus:PGCommandStatus_OK];
+    CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
     NSString *jsString = [result toErrorCallbackString:connectionCallbackId];
     [self.webView stringByEvaluatingJavaScriptFromString:jsString];
 }
@@ -51,7 +51,7 @@
 }
 
 - (void)handleRequest:(NSObject<CommandReceiver> *)command {
-    PluginResult *result = [PluginResult resultWithStatus:PGCommandStatus_OK messageAsString:[command getReceiveString]];
+    CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:[command getReceiveString]];
     NSString *jsString = [result toSuccessCallbackString:callbackId];
     [self.webView stringByEvaluatingJavaScriptFromString:jsString];
 }

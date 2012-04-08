@@ -6,6 +6,7 @@
 
 - (void) start:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options
 {
+    NSLog(@"Mobilogics start");
     BarcodeBuilder *builder = [[BarcodeBuilder alloc] init];
     [[Connection sharedInstance] setBuilder:builder];
     [[Connection sharedInstance] addAccessoryDidConnectNotification:self];
@@ -15,6 +16,7 @@
 
 - (void)stop:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options
 {
+    NSLog(@"Mobilogics stop");
     [[Connection sharedInstance] removeAccessoryDidConnectNotification:self];
     [[Connection sharedInstance] removeAccessoryDidDisconnectNotification:self];
     [[Connection sharedInstance] removeReceiveCommandHandler:self];
@@ -22,6 +24,9 @@
 
 - (void)scan:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options
 {
+    NSLog(@"Mobilogics scan");
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"scan" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    [alert show];
     self.callbackId = [arguments objectAtIndex:0];
     if ([[Connection sharedInstance] isConnected])
         [[Connection sharedInstance] execute:[ScanShot sharedInstance]];

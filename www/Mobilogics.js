@@ -18,23 +18,23 @@ Mobilogics.install = function () {
 /**
  * Add to PhoneGap constructor
  **/
-PhoneGap.addConstructor(Mobilogics.install);
+Cordova.addConstructor(Mobilogics.install);
 
 /**
  * Functions interface
  **/
 Mobilogics.prototype.start = function () {
-	PhoneGap.exec(null, null, "Mobilogics", "start", []);
+	Cordova.exec(null, null, "Mobilogics", "start", []);
 }
 
 Mobilogics.prototype.stop = function () {
-	PhoneGap.exec(null, null, "Mobilogics", "stop", []);
+	Cordova.exec(null, null, "Mobilogics", "stop", []);
 }
 
 Mobilogics.prototype.scan = function (successCallback) {
-	PhoneGap.exec(successCallback, null, "Mobilogics", "scan", []);
+	Cordova.exec(successCallback, null, "Mobilogics", "scan", []);
 }
 
 Mobilogics.prototype.addConnectionListener = function (connectedCallback, disconnectedCallback) {
-	PhoneGap.exec(connectedCallback, disconnectedCallback, "Mobilogics", "addConnectionListener", []);
+	Cordova.exec(connectedCallback, disconnectedCallback, "Mobilogics", "addConnectionListener", []);
 }
